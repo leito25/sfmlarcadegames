@@ -1,0 +1,46 @@
+// TETRIS CODE
+#include <SFML3/Graphics.hpp>
+#include <optional>
+#include <time.h>
+
+using namespace sf;
+
+int main()
+{
+    // SFML 3 utiliza sf::Vector2u encerrado entre llaves {} para definir la resolución
+    sf::RenderWindow window(sf::VideoMode({800, 600}), "SFML 3 Window");
+
+    // Crear un círculo con un radio de 100 píxeles
+    sf::CircleShape circle(100.f);
+
+    // Asignar el color verde al círculo
+    circle.setFillColor(sf::Color::Green);
+
+    // SFML 3 requiere un sf::Vector2f en lugar de pasar las coordenadas X e Y sueltas
+    circle.setPosition({350.f, 250.f});
+
+    // Bucle principal de la aplicación
+    while (window.isOpen())
+    {
+        // En SFML 3, window.pollEvent() devuelve un std::optional<sf::Event>
+        while (const std::optional event = window.pollEvent())
+        {
+            // Se verifica el tipo de evento directamente mediante las nuevas clases de SFML 3
+            if (event->is<sf::Event::Closed>())
+            {
+                window.close();
+            }
+        }
+
+        // Limpiar la pantalla
+        window.clear();
+
+        // Dibujar el círculo
+        window.draw(circle);
+
+        // Mostrar el contenido renderizado
+        window.display();
+    }
+
+    return 0;
+}

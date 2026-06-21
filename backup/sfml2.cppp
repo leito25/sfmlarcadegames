@@ -1,0 +1,44 @@
+// TETRIS CODE
+#include <SFML2/Graphics.hpp>
+#include <optional>
+#include <time.h>
+
+using namespace sf;
+
+int main()
+{
+    // Create an SFML window with a resolution of 800x600, named "SFML Window"
+    sf::RenderWindow window(sf::VideoMode(800, 600), "SFML Window");
+
+    // Define a circle shape with a radius of 100 pixels
+    sf::CircleShape circle(100.f);
+
+    // Set the circle's fill color to green
+    circle.setFillColor(sf::Color::Green);
+
+    // Set the position of the circle on the screen (x, y)
+    circle.setPosition(350.f, 250.f);
+
+    // Run the main game loop
+    while (window.isOpen())
+    {
+        // Process events (e.g., checking if the user closed the window)
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+
+        // Clear the window with a solid color (e.g., black)
+        window.clear();
+
+        // Draw the circle to the window
+        window.draw(circle);
+
+        // Display the contents of the window to the screen
+        window.display();
+    }
+
+    return 0;
+}

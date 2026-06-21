@@ -1,30 +1,32 @@
-#include <SFML/Graphics.hpp>
+// TETRIS CODE
+#include <SFML2/Graphics.hpp>
+#include <optional>
+#include <time.h>
+
+using namespace sf;
 
 int main()
 {
-    // SFML 3 takes a sf::Vector2u directly for VideoMode
-    sf::RenderWindow window(sf::VideoMode({800, 600}), "SFML 3 Hello World");
+    RenderWindow window(VideoMode(320, 480), "MyOwnTetris");
 
-    sf::CircleShape circle(100.f);
-    circle.setFillColor(sf::Color::Magenta);
+    Texture t;
+    t.loadFromFile("assets/images/tiles.png");
 
-    // SFML 3 encourages brace initialization for vectors
-    circle.setPosition({300.f, 200.f});
+    Sprite s(t);
 
     while (window.isOpen())
     {
-        // SFML 3 replaces the old event loop with std::optional
-        while (const std::optional<sf::Event> event = window.pollEvent())
+        Event e;
+        while (window.pollEvent(e))
         {
-            // Events are now type-safe and checked using .is<T>()
-            if (event->is<sf::Event::Closed>())
+            if (e.type == Event::Closed)
             {
                 window.close();
             }
         }
 
-        window.clear(sf::Color::Black);
-        window.draw(circle);
+        window.clear(Color::White);
+        window.draw(s);
         window.display();
     }
 
